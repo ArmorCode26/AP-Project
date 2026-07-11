@@ -19,11 +19,13 @@ SOURCES += \
     album.cpp \
     main.cpp \
     mainwindow.cpp \
+    playlist.cpp \
     song.cpp
 
 HEADERS += \
     album.h \
     mainwindow.h \
+    playlist.h \
     song.h
 
 FORMS += \
