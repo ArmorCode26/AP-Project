@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     account.cpp \
     album.cpp \
+    albumrepository.cpp \
     main.cpp \
     mainwindow.cpp \
     playlist.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     abstractrepository.h \
     account.h \
     album.h \
+    albumrepository.h \
     mainwindow.h \
     playlist.h \
     song.h \
