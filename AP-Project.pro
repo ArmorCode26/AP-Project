@@ -28,6 +28,7 @@ SOURCES += \
 HEADERS += \
     abstractrepository.h \
     account.h \
+    accountrepository.h \
     album.h \
     albumrepository.h \
     mainwindow.h \
