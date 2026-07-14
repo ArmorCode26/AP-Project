@@ -5,43 +5,43 @@
 int SongRepository::save(const Song& entity) {
     // جستجو برای پیدا کردن اینکه آیا این آهنگ از قبل وجود داشته یا نه
     for (size_t i = 0; i < songs.size(); ++i) {
-        if (songs[i].getId() == entity.getId()) {
-            songs[i] = entity; // به‌روزرسانی با مقدار جدید
-            return entity.getId();
+        if (songs[i].getSongId() == entity.getSongId()) {
+            songs[i] = entity;
+            return entity.getSongId();
         }
     }
-    // اگر وجود نداشت، آن را به وکتور اضافه می‌کنیم
+    // اگر وجود نداشت....
     songs.push_back(entity);
-    return entity.getId();
+    return entity.getSongId();
 }
 
 // تابع حذف آهنگ براساس آیدی
 bool SongRepository::remove(int id) {
-    for (auto it = songs.begin(); it != songs.end(); ++it) {
-        if (it->getId() == id) {
-            songs.erase(it); // حذف از وکتور
-            return true; // حذف موفقیت‌آمیز
+    for (size_t i = 0; i < songs.size(); ++i) {
+        if (songs[i].getSongId() == id) {
+            songs.erase(songs.begin()+i);
+            return true;
         }
     }
-    return false; // پیدا نشد
+    return false;
 }
 
-// تابع جستجوی آهنگ (استفاده از جعبه جادویی optional)
+// تابع جستجوی آهنگ
 std::optional<Song> SongRepository::search(int id) {
-    for (const auto& song : songs) {
-        if (song.getId() == id) {
-            return song; // آهنگ پیدا شد و داخل جعبه برگشت داده می‌شود
+    for (size_t i = 0; i < songs.size(); ++i) {
+        if (songs[i].getSongId() == id) {
+            return songs[i];
         }
     }
-    return std::nullopt; // جعبه خالی (یعنی پیدا نشد)
+    return std::nullopt; // جعبه خالی
 }
 
-// آهنگ‌های یک هنرمند که به هیچ آلبومی تعلق ندارند (آیدی آلبوم صفر است)
+// آهنگ‌های یک هنرمند که به هیچ آلبومی تعلق ندارند
 std::vector<Song> SongRepository::singleSongs(int artistId) {
     std::vector<Song> result;
-    for (const auto& song : songs) {
-        if (song.getArtistId() == artistId && song.getAlbumId() == 0) {
-            result.push_back(song);
+    for (size_t i = 0; i < songs.size(); ++i) {
+        if (songs[i].getArtistId() == artistId && songs[i].getAlbumId() == 0) {
+            result.push_back(songs[i]);
         }
     }
     return result;
@@ -61,9 +61,9 @@ std::vector<Song> SongRepository::getByAlbum(int albumId) {
 // دریافت تمام آهنگ‌های یک هنرمند
 std::vector<Song> SongRepository::getByArtist(int artistId) {
     std::vector<Song> result;
-    for (const auto& song : songs) {
-        if (song.getArtistId() == artistId) {
-            result.push_back(song);
+    for (size_t i = 0; i < songs.size(); ++i) {
+        if (songs[i].getArtistId() == artistId) {
+            result.push_back(songs[i]);
         }
     }
     return result;
