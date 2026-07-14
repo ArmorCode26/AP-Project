@@ -4,7 +4,9 @@ Song::Song()
     : title(""), releaseYear(0), genre(""), filePath(""), songId(0), artistId(0), albumId(0) {
 
 }
+Song::Song(int id):songId(id){
 
+}
 Song::Song(std::string title, int releaseYear, std::string genre, std::string filePath, int songId, int artistId, int albumId)
     : title(title), releaseYear(releaseYear), genre(genre), filePath(filePath), songId(songId), artistId(artistId), albumId(albumId) {
 

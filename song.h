@@ -16,6 +16,7 @@ private:
 
 public:
     Song();
+    Song(int id); //برای تابعinsertSong در playlistRepository
     Song(string title, int releaseYear, string gener,string filePath, int songId, int artistId, int albumId);
 
     string getTitle()const;
