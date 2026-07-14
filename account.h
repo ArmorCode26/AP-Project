@@ -3,7 +3,7 @@
 
 #include <string>
 
-class User {
+class Account {
 private:
     int id;//شناسه کاربر
     std::string fullName;//نام اصلی
@@ -14,9 +14,9 @@ private:
     std::string profilePhoto;  // مسیر عکس پروفایل (امتیازی)
 
 public:
-    User();
+    Account();
 
-    User(int userId, const std::string& name, const std::string& user,
+    Account(int userId, const std::string& name, const std::string& user,
          const std::string& bio, const std::string& userRole,
          const std::string& pass, const std::string& photo = "");
 
