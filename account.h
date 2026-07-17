@@ -1,7 +1,8 @@
-#ifndef USER_H
-#define USER_H
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
 
 #include <string>
+#include <vector>
 
 class Account {
 private:
@@ -13,6 +14,8 @@ private:
     std::string password;//رمز عبور
     std::string profilePhoto;  // مسیر عکس پروفایل (امتیازی)
 
+    //نیاز داریم برای کلاس account repository:
+    std::vector<int> likedSongs;
 public:
     Account();
 
@@ -27,6 +30,7 @@ public:
     std::string getRole() const;
     std::string getPassword() const;
     std::string getProfilePhoto() const;
+    std::vector<int> getLikedSongs() const;
 
     void setId(int userId);
     void setFullName(const std::string& name);
@@ -35,6 +39,10 @@ public:
     void setRole(const std::string& userRole);
     void setPassword(const std::string& pass);
     void setProfilePhoto(const std::string& photo);
+
+    //توابع مورد نیاز برای اهنگ های لایک شده
+    void addLikedSong (int songId);
+    void removeLikedSong(int songId);
 };
 
 #endif // USER_H

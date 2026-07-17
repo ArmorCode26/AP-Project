@@ -20,6 +20,8 @@ std::string Song::getFilePath() const { return filePath; }
 int Song::getSongId() const { return songId; }
 int Song::getArtistId() const { return artistId; }
 int Song::getAlbumId() const { return albumId; }
+int Song::getPlaylistId() const { return playlistId; }
+std::vector<int> Song:: getlikedUserIds()const {return likedUserIds; }
 
 void Song::setTitle(std::string title) { this->title = title; }
 void Song::setReleaseYear(int releaseYear) { this->releaseYear = releaseYear; }
@@ -28,3 +30,6 @@ void Song::setFilePath(std::string filePath) { this->filePath = filePath; }
 void Song::setSongId(int songId) { this->songId = songId; }
 void Song::setArtistId(int artistId) { this->artistId = artistId; }
 void Song::setAlbumId(int albumId) { this->albumId = albumId; }
+void Song::setPlaylistId(int playlistId) { this->playlistId = playlistId; }
+
+void Song::addlikedUserIds(int userId){getlikedUserIds().push_back(userId); }

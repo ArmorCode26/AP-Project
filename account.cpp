@@ -1,4 +1,5 @@
 #include "account.h"
+//#include <vector>
 
 
 Account::Account()
@@ -18,6 +19,7 @@ std::string Account::getBiography() const { return biography; }
 std::string Account::getRole() const { return role; }
 std::string Account::getPassword() const { return password; }
 std::string Account::getProfilePhoto() const { return profilePhoto; }
+std::vector<int> Account::getLikedSongs() const { return likedSongs;}
 
 void Account::setId(int userId) { id = userId; }
 void Account::setFullName(const std::string& name) { fullName = name; }
@@ -26,3 +28,15 @@ void Account::setBiography(const std::string& bio) { biography = bio; }
 void Account::setRole(const std::string& userRole) { role = userRole; }
 void Account::setPassword(const std::string& pass) { password = pass; }
 void Account::setProfilePhoto(const std::string& photo) { profilePhoto = photo; }
+
+void Account::addLikedSong(int songId) {
+    likedSongs.push_back(songId);
+}
+void Account::removeLikedSong(int songId) {
+    for (size_t i = 0; i < likedSongs.size(); i++) {
+        if (likedSongs[i] == songId) {
+            likedSongs.erase(likedSongs.begin() + i);
+            break;
+        }
+    }
+}

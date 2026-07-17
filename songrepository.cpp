@@ -1,5 +1,9 @@
 #include "songrepository.h"
+#include<playlist.h>
+#include<playlistrepository.h>
+#include<listenerrepository.h>
 #include <algorithm>
+#include<optional>
 
 // تابع ذخیره یا به‌روزرسانی
 int SongRepository::save(const Song& entity) {
@@ -69,16 +73,33 @@ std::vector<Song> SongRepository::getByArtist(int artistId) {
     return result;
 }
 
-// دریافت آهنگ‌های یک لیست پخش (فعلاً وکتور خالی برمی‌گرداند تا ساختار تعاملی لیست پخش کامل شود)
+// دریافت آهنگ‌های یک لیست پخش
 std::vector<Song> SongRepository::getByPlaylist(int playlistId) {
     std::vector<Song> result;
-    // در آینده پیاده‌سازی کامل‌تر می‌شود
+
+    for (size_t i = 0; i < songs.size(); i++) {
+        if (songs[i].getPlaylistId() == playlistId) {
+            result.push_back(songs[i]);
+        }
+    }
+
     return result;
 }
-
 // دریافت آهنگ‌های پسندیده شده توسط یک شنونده
 std::vector<Song> SongRepository::getByLikedSongs(int listenerId) {
     std::vector<Song> result;
-    // در آینده بر اساس وکتور لایک‌های کاربر پر می‌شود
+
+    for (size_t i = 0; i < songs.size(); i++) {
+        std::vector<int> users = songs[i].getlikedUserIds();
+
+        // چک می‌کنیم آیا این کاربر در لیست لایک‌کننده‌های این آهنگ هست یا نه
+        for (size_t j = 0; j < users.size(); j++) {
+            if (users[j] == listenerId) {
+                result.push_back(songs[i]);
+                break;
+            }
+        }
+    }
+
     return result;
 }

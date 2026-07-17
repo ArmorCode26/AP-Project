@@ -1,6 +1,7 @@
 #ifndef SONG_H
 #define SONG_H
 #include<string>
+#include<vector>
 using namespace std;
 
 class Song
@@ -13,7 +14,8 @@ private:
       int songId;//شناسه اهنگ
       int artistId;//شماسه هنرمند
       int albumId;//شناسه البوم
-
+       int playlistId=-1;//شناسه پلی لیست برای تابع getByplaylist
+        std::vector<int>likedUserIds;//ایدی کاربرانی ک اهنگ لایک کردند برای تابع getByLikedSongs
 public:
     Song();
     Song(int id); //برای تابعinsertSong در playlistRepository
@@ -26,6 +28,8 @@ public:
     int getSongId()const;
     int getArtistId()const;
     int getAlbumId()const;
+    int getPlaylistId()const;
+    std::vector<int> getlikedUserIds()const;
 
     void setTitle(string title);
     void setReleaseYear(int releaseYear);
@@ -34,6 +38,9 @@ public:
     void setSongId(int songId);
     void setArtistId(int artistId);
     void setAlbumId(int albumId);
+    void setPlaylistId(int albumId);
+
+    void addlikedUserIds(int userId);
 };
 
 #endif // SONG_H

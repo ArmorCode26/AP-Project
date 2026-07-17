@@ -4,11 +4,15 @@
 #include <vector>
 #include "abstractrepository.h"
 #include "song.h"
+#include"playlistrepository.h"
+#include "listenerrepository.h"
 
 // این کلاس از کلاس انتزاعی برای موجودیت Song ارث‌بری می‌کند
 class SongRepository : public AbstractRepository<Song> {
 private:
     std::vector<Song> songs; // بانک اطلاعاتی موقت برای ذخیره آهنگ‌ها در حافظه
+    PlaylistRepository playlistRepo; // برای تابع getByPlaylist
+    ListenerRepository listenerRepo;// برای تابع getByPlaylist
 
 public:
 
