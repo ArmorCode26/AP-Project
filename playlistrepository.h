@@ -19,6 +19,8 @@ public:
     bool insertSong(int playlistId, int songId);
     bool removeSong(int playlistId, int songId);
     std::vector<Playlist> playlists(int listenerId);
+
+    const std::vector<Playlist>& getAllPlaylists() const ;
 };
 
 #endif // PLAYLISTREPOSITORY_H

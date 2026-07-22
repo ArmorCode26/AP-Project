@@ -17,6 +17,8 @@ public:
     std::optional<Account> search(int id) override;
 
     std::optional<Account> searchByUserName(const std::string& username) override;
+
+    const std::vector<Account>& getAll() const ;
 };
 
 #endif // ARTISTREPOSITORY_H

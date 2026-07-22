@@ -19,6 +19,7 @@ SOURCES += \
     account.cpp \
     album.cpp \
     albumrepository.cpp \
+    appmanager.cpp \
     artistrepository.cpp \
     listenerrepository.cpp \
     main.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     accountrepository.h \
     album.h \
     albumrepository.h \
+    appmanager.h \
     artistrepository.h \
     listenerrepository.h \
     mainwindow.h \

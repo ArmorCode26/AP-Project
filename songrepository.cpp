@@ -7,16 +7,29 @@
 
 // تابع ذخیره یا به‌روزرسانی
 int SongRepository::save(const Song& entity) {
-    // جستجو برای پیدا کردن اینکه آیا این آهنگ از قبل وجود داشته یا نه
+    Song tempEntity = entity;
+
+    // بخش به‌روزرسانی
     for (size_t i = 0; i < songs.size(); ++i) {
-        if (songs[i].getSongId() == entity.getSongId()) {
-            songs[i] = entity;
-            return entity.getSongId();
+        if (songs[i].getSongId() == tempEntity.getSongId() && tempEntity.getSongId() != 0) {
+            songs[i] = tempEntity;
+            return tempEntity.getSongId();
         }
     }
-    // اگر وجود نداشت....
-    songs.push_back(entity);
-    return entity.getSongId();
+
+    // بخش ایجاد جدید و تولید آی‌دی خودکار
+    if (tempEntity.getSongId() == 0) {
+        int nextId = 1;
+
+        if (songs.empty() == false) {
+            nextId = songs.back().getSongId() + 1;
+        }
+
+        tempEntity.setSongId(nextId);
+    }
+
+    songs.push_back(tempEntity);
+    return tempEntity.getSongId();
 }
 
 // تابع حذف آهنگ براساس آیدی

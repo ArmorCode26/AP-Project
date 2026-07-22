@@ -2,15 +2,29 @@
 
 // ذخیره یا ویرایش پلی‌لیست
 int PlaylistRepository::save(const Playlist& entity) {
-    for (size_t i = 0; i < playlistsList.size(); i++) {
-        if (playlistsList[i].getPlaylistId() == entity.getPlaylistId()) {
-            playlistsList[i] = entity;
-            return entity.getPlaylistId();
+    Playlist tempEntity = entity;
+
+    // ۱. بخش به‌روزرسانی (Update)
+    for (size_t i = 0; i < playlistsList.size(); ++i) {
+        if (playlistsList[i].getPlaylistId() == tempEntity.getPlaylistId() && tempEntity.getPlaylistId() != 0) {
+            playlistsList[i] = tempEntity;
+            return tempEntity.getPlaylistId();
         }
     }
 
-    playlistsList.push_back(entity);
-    return entity.getPlaylistId();
+    // ۲. بخش ایجاد جدید و تولید آی‌دی خودکار
+    if (tempEntity.getPlaylistId() == 0) {
+        int nextId = 1;
+
+        if (playlistsList.empty() == false) {
+            nextId = playlistsList.back().getPlaylistId() + 1;
+        }
+
+        tempEntity.setPlaylistId(nextId);
+    }
+
+    playlistsList.push_back(tempEntity);
+    return tempEntity.getPlaylistId();
 }
 
 // حذف پلی‌لیست
@@ -94,3 +108,5 @@ std::vector<Playlist> PlaylistRepository::playlists(int listenerId) {
     }
     return result;
 }
+
+const std::vector<Playlist>& PlaylistRepository::getAllPlaylists() const { return playlistsList; }

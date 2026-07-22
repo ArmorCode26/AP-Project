@@ -2,16 +2,34 @@
 
 //  تابع ذخیره یا به‌روزرسانی آلبوم
 int AlbumRepository::save(const Album& entity) {
+    Album tempEntity = entity;
 
+    //  اگر آلبوم از قبل وجود داشته باشد وآی‌دی آن صفر نباشد
     for (size_t i = 0; i < albums.size(); ++i) {
-        if (albums[i].getAlbumId() == entity.getAlbumId()) {
-            albums[i] = entity;
-            return entity.getAlbumId();
+        if (albums[i].getAlbumId() == tempEntity.getAlbumId() && tempEntity.getAlbumId() != 0) {
+            albums[i] = tempEntity;
+            return tempEntity.getAlbumId();
         }
     }
 
-    albums.push_back(entity);
-    return entity.getAlbumId();
+    //   تولید آی‌دی خودکار: اگر آی‌دی آلبوم صفر باشد
+    if (tempEntity.getAlbumId() == 0) {
+        int nextId = 1; // اگر وکتور خالی باشد، آی‌دی اولین آلبوم می‌شود ۱
+
+        if (albums.empty() == false) {
+            // اگر خالی نباشد، آی‌دی آخرین آلبوم وکتور را می‌گیریم و یکی به آن اضافه می‌کنیم
+            nextId = albums.back().getAlbumId() + 1;
+        }
+
+        // تنظیم آی‌دی جدید روی آلبوم
+        tempEntity.setAlbumId(nextId);
+    }
+
+    // اضافه کردن آلبوم جدید به وکتور)
+    albums.push_back(tempEntity);
+
+    // برگرداندن آی‌دی نهایی آلبوم
+    return tempEntity.getAlbumId();
 }
 
 //  تابع حذف آلبوم براساس آیدی

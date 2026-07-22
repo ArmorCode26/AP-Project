@@ -40,3 +40,5 @@ std::optional<Account> ArtistRepository::searchByUserName(const std::string& use
     }
     return std::nullopt;
 }
+
+const std::vector<Account>& ArtistRepository:: getAll() const { return artistsList; }
